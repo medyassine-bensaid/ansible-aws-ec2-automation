@@ -1,0 +1,25 @@
+# playbooks/ec2_create.yaml
+
+---
+- hosts: localhost
+  connection: local
+
+  tasks:
+    - name: Create EC2 instances
+      amazon.aws.ec2_instance:
+        name: "{{ item.name }}"
+        key_name: "server-Jenkins"
+        instance_type: t2.micro
+        security_group: default
+        region: ap-southeast-2
+        aws_access_key: "{{ ec2.access_key }}"
+        aws_secret_key: "{{ ec2.secret_key }}"
+        network:
+          assign_public_ip: true
+        image_id: "{{ item.image }}"
+        tags:
+          environment: "{{ item.name }}"
+      loop:
+        - { image: "ami-09f5ddaab17f5ff43", name: "manage-node-1" }
+        - { image: "ami-03f0544597f43a91d", name: "manage-node-2" }
+        - { image: "ami-03f0544597f43a91d", name: "manage-node-3" }

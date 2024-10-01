@@ -1,0 +1,18 @@
+# .gitignore
+
+# Ignore Ansible Vault password file
+scripts/vault.pass
+
+# Ignore encrypted group_vars
+group_vars/all/pass.yml
+
+# Ignore SSH keys
+~/.ssh/id_rsa
+~/.ssh/id_rsa.pub
+
+# Ignore Python virtual environments
+venv/
+
+# Ignore other sensitive or system-specific files
+*.log
+*.tmp
